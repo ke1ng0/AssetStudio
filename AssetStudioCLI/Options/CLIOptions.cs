@@ -129,6 +129,7 @@ namespace AssetStudioCLI.Options
         public static Option<bool> f_notRestoreExtensionName;
         public static Option<bool> f_avoidLoadingViaTypetree;
         public static Option<bool> f_rawByteArrayFromMono;
+        public static Option<bool> f_typeTreeArrayFromMono;
         public static Option<bool> f_loadAllAssets;
 
         static CLIOptions()
@@ -567,6 +568,15 @@ namespace AssetStudioCLI.Options
                 optionHelpGroup: HelpGroups.Advanced,
                 isFlag: true
             );
+            f_typeTreeArrayFromMono = new GroupedOption<bool>
+            (
+                optionDefaultValue: false,
+                optionName: "--typetree-array",
+                optionDescription: "(Flag) If specified, Studio will try to extract type tree array from MonoBehaviour assets\n(Only for ExportRaw mode)\n",
+                optionExample: "",
+                optionHelpGroup: HelpGroups.Advanced,
+                isFlag: true
+            );
             f_loadAllAssets = new GroupedOption<bool>
             (
                 optionDefaultValue: false,
@@ -759,6 +769,16 @@ namespace AssetStudioCLI.Options
                             return;
                         }
                         f_rawByteArrayFromMono.Value = true;
+                        flagIndexes.Add(i);
+                        break;
+                    case "--typetree-array":
+                        if (o_workMode.Value != WorkMode.ExportRaw)
+                        {
+                            Console.WriteLine($"{"Error".Color(brightRed)} during parsing [{flag.Color(brightYellow)}] flag. This flag is not suitable for the current working mode [{o_workMode.Value}].\n");
+                            ShowOptionDescription(f_typeTreeArrayFromMono, isFlag: true);
+                            return;
+                        }
+                        f_typeTreeArrayFromMono.Value = true;
                         flagIndexes.Add(i);
                         break;
                     case "--load-all":

@@ -30,6 +30,7 @@ namespace AssetStudioGUI
             parallelExportMaxLabel.Text += maxParallelTasks;
             parallelExportCheckBox.Checked = Properties.Settings.Default.parallelExport;
             rawByteArrayFromMono.Checked = Properties.Settings.Default.rawByteArrayFromMono;
+            typeTreeArrayFromMono.Checked = Properties.Settings.Default.typeTreeArrayFromMono;
 
             l2dModelGroupComboBox.SelectedIndex = (int)Properties.Settings.Default.l2dModelGroupOption;
             l2dAssetSearchByFilenameCheckBox.Checked = Properties.Settings.Default.l2dAssetSearchByFilename;
@@ -55,6 +56,7 @@ namespace AssetStudioGUI
             Properties.Settings.Default.parallelExport = parallelExportCheckBox.Checked;
             Properties.Settings.Default.parallelExportCount = (int)parallelExportUpDown.Value;
             Properties.Settings.Default.rawByteArrayFromMono = rawByteArrayFromMono.Checked;
+            Properties.Settings.Default.typeTreeArrayFromMono = typeTreeArrayFromMono.Checked;
 
             Properties.Settings.Default.l2dModelGroupOption = (CubismLive2DExtractor.Live2DModelGroupOption)l2dModelGroupComboBox.SelectedIndex;
             Properties.Settings.Default.l2dAssetSearchByFilename = l2dAssetSearchByFilenameCheckBox.Checked;
