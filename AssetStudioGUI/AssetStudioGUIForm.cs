@@ -220,6 +220,7 @@ namespace AssetStudioGUI
                     return;
                 ResetForm();
                 await Task.Run(() => assetsManager.LoadFilesAndFolders(out openDirectoryBackup, pathList));
+                AutoDetectAssemblyFolder(openDirectoryBackup);
                 BuildAssetStructures();
             }
         }
@@ -232,6 +233,7 @@ namespace AssetStudioGUI
             {
                 ResetForm();
                 await Task.Run(() => assetsManager.LoadFilesAndFolders(out openDirectoryBackup, openFolderDialog.Folder));
+                AutoDetectAssemblyFolder(openDirectoryBackup);
                 BuildAssetStructures();
             }
         }
@@ -559,6 +561,11 @@ namespace AssetStudioGUI
         {
             var exportOpt = new ExportOptions();
             exportOpt.ShowDialog(this);
+        }
+
+        private void specifyAssemblyFolderMenuItem_Click(object sender, EventArgs e)
+        {
+            Studio.SelectAssemblyFolder();
         }
 
         private void assetListView_RetrieveVirtualItem(object sender, RetrieveVirtualItemEventArgs e)

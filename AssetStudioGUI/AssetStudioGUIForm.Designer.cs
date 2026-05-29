@@ -41,6 +41,7 @@
             this.displayAll = new System.Windows.Forms.ToolStripMenuItem();
             this.useAssetLoadingViaTypetreeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.meshLazyLoadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.specifyAssemblyFolderMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.assetLoadingToolStripSeparator = new System.Windows.Forms.ToolStripSeparator();
             this.enablePreview = new System.Windows.Forms.ToolStripMenuItem();
             this.displayInfo = new System.Windows.Forms.ToolStripMenuItem();
@@ -273,6 +274,7 @@
             this.displayAll,
             this.useAssetLoadingViaTypetreeToolStripMenuItem,
             this.meshLazyLoadToolStripMenuItem,
+            this.specifyAssemblyFolderMenuItem,
             this.assetLoadingToolStripSeparator,
             this.enablePreview,
             this.displayInfo,
@@ -316,6 +318,13 @@
             this.meshLazyLoadToolStripMenuItem.Size = new System.Drawing.Size(243, 22);
             this.meshLazyLoadToolStripMenuItem.Text = "Use lazy loading for Mesh assets";
             this.meshLazyLoadToolStripMenuItem.CheckedChanged += new System.EventHandler(this.meshLazyLoadToolStripMenuItem_CheckedChanged);
+            // 
+            // specifyAssemblyFolderMenuItem
+            // 
+            this.specifyAssemblyFolderMenuItem.Name = "specifyAssemblyFolderMenuItem";
+            this.specifyAssemblyFolderMenuItem.Size = new System.Drawing.Size(243, 22);
+            this.specifyAssemblyFolderMenuItem.Text = "Specify Unity assemblies folder";
+            this.specifyAssemblyFolderMenuItem.Click += new System.EventHandler(this.specifyAssemblyFolderMenuItem_Click);
             // 
             // assetLoadingToolStripSeparator
             // 
@@ -1871,6 +1880,7 @@
         private System.Windows.Forms.ToolStripMenuItem saveOptionsToDiskToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator importOptionsToolStripSeparator;
         private System.Windows.Forms.ToolStripMenuItem meshLazyLoadToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem specifyAssemblyFolderMenuItem;
     }
 }
 

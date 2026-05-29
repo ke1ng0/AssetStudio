@@ -968,27 +968,94 @@ namespace AssetStudioGUI
             }
         }
 
-        public static TypeTree MonoBehaviourToTypeTree(MonoBehaviour m_MonoBehaviour)
+        public static void SelectAssemblyFolder()
         {
-            SelectAssemblyFolder();
-            return m_MonoBehaviour.ConvertToTypeTree(assemblyLoader);
+            var openFolderDialog = new OpenFolderDialog();
+            openFolderDialog.Title = "Select Assembly Folder";
+            if (openFolderDialog.ShowDialog() == DialogResult.OK)
+            {
+                assemblyLoader.Clear();
+                assemblyLoader.Load(openFolderDialog.Folder);
+            }
+            else
+            {
+                assemblyLoader.Loaded = true;
+            }
         }
 
-        private static void SelectAssemblyFolder()
+        public static void AutoDetectAssemblyFolder(string path)
+        {
+            if (assemblyLoader.Loaded)
+                return;
+
+            if (string.IsNullOrEmpty(path))
+                return;
+
+            var parent = path;
+            if (File.Exists(path))
+            {
+                parent = Path.GetDirectoryName(path);
+            }
+
+            if (string.IsNullOrEmpty(parent))
+                return;
+
+            var searchPaths = new[]
+            {
+                Path.Combine(parent, "Managed"),
+                Path.Combine(parent, "DummyDll"),
+                Path.Combine(parent, "dump"),
+                Path.Combine(parent, "cpp", "DummyDll"), // Some versions of Il2CppDumper
+            };
+
+            foreach (var searchPath in searchPaths)
+            {
+                if (Directory.Exists(searchPath))
+                {
+                    var dllFiles = Directory.GetFiles(searchPath, "*.dll");
+                    if (dllFiles.Length > 0)
+                    {
+                        Logger.Info($"Auto-detected assembly folder: {searchPath}");
+                        assemblyLoader.Load(searchPath);
+                        return;
+                    }
+                }
+            }
+
+            // Also check one level up if we are inside a Data folder
+            var grandParent = Directory.GetParent(parent)?.FullName;
+            if (!string.IsNullOrEmpty(grandParent))
+            {
+                searchPaths = new[]
+                {
+                    Path.Combine(grandParent, "Managed"),
+                    Path.Combine(grandParent, "DummyDll"),
+                    Path.Combine(grandParent, "dump"),
+                };
+
+                foreach (var searchPath in searchPaths)
+                {
+                    if (Directory.Exists(searchPath))
+                    {
+                        var dllFiles = Directory.GetFiles(searchPath, "*.dll");
+                        if (dllFiles.Length > 0)
+                        {
+                            Logger.Info($"Auto-detected assembly folder: {searchPath}");
+                            assemblyLoader.Load(searchPath);
+                            return;
+                        }
+                    }
+                }
+            }
+        }
+
+        public static TypeTree MonoBehaviourToTypeTree(MonoBehaviour m_MonoBehaviour)
         {
             if (!assemblyLoader.Loaded)
             {
-                var openFolderDialog = new OpenFolderDialog();
-                openFolderDialog.Title = "Select Assembly Folder";
-                if (openFolderDialog.ShowDialog() == DialogResult.OK)
-                {
-                    assemblyLoader.Load(openFolderDialog.Folder);
-                }
-                else
-                {
-                    assemblyLoader.Loaded = true;
-                }
+                SelectAssemblyFolder();
             }
+            return m_MonoBehaviour.ConvertToTypeTree(assemblyLoader);
         }
 
         public static string DumpAsset(Object obj)

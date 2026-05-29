@@ -1,5 +1,11 @@
 # Changelog
 
+## v0.19.0.1 [2026-05-29]
+#### New features
+- [GUI] Added auto-detection for assembly folders (`Managed`, `DummyDll`, `dump`).
+- [GUI] Added "Specify Unity assemblies folder" option to manually load DLLs for MonoBehaviour parsing.
+- [GUI] Improved `AssemblyLoader` management and form reset logic.
+
 ## v0.19.0.0 [04-09-2025]
 #### Breaking Changes
 - Many asset fields of array type have been replaced with list type *(aka fixed the cause of most memory leaks)* ([35b2499](https://github.com/aelurum/AssetStudio/commit/35b24990c6a5d99c15b661578cf9da26aefe8d1b))
