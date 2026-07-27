@@ -1,4 +1,4 @@
-﻿using AssetStudio;
+using AssetStudio;
 using CubismLive2DExtractor;
 using System;
 using System.Collections.Concurrent;
@@ -654,7 +654,14 @@ namespace AssetStudioGUI
                                 isExported = ExportRawFile(asset, exportPath);
                                 break;
                             case ExportType.Dump:
-                                isExported = ExportDumpFile(asset, exportPath);
+                                if (Properties.Settings.Default.typeTreeArrayFromMono)
+                                {
+                                    isExported = ExportTypeTreeFile(asset, exportPath);
+                                }
+                                else
+                                {
+                                    isExported = ExportDumpFile(asset, exportPath);
+                                }
                                 break;
                             case ExportType.Convert:
                                 isExported = ExportConvertFile(asset, exportPath);

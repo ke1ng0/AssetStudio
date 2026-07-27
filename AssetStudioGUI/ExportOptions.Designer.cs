@@ -1,4 +1,4 @@
-﻿namespace AssetStudioGUI
+namespace AssetStudioGUI
 {
     partial class ExportOptions
     {
@@ -33,6 +33,7 @@
             this.Cancel = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.rawByteArrayFromMono = new System.Windows.Forms.CheckBox();
+            this.typeTreeArrayFromMono = new System.Windows.Forms.CheckBox();
             this.overwriteExistingFiles = new System.Windows.Forms.CheckBox();
             this.parallelExportMaxLabel = new System.Windows.Forms.Label();
             this.parallelExportCheckBox = new System.Windows.Forms.CheckBox();
@@ -98,7 +99,7 @@
             // OKbutton
             // 
             this.OKbutton.BackColor = System.Drawing.SystemColors.ButtonFace;
-            this.OKbutton.Location = new System.Drawing.Point(460, 459);
+            this.OKbutton.Location = new System.Drawing.Point(460, 479);
             this.OKbutton.Name = "OKbutton";
             this.OKbutton.Size = new System.Drawing.Size(75, 23);
             this.OKbutton.TabIndex = 4;
@@ -110,7 +111,7 @@
             // 
             this.Cancel.BackColor = System.Drawing.SystemColors.ButtonFace;
             this.Cancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.Cancel.Location = new System.Drawing.Point(541, 459);
+            this.Cancel.Location = new System.Drawing.Point(541, 479);
             this.Cancel.Name = "Cancel";
             this.Cancel.Size = new System.Drawing.Size(75, 23);
             this.Cancel.TabIndex = 5;
@@ -123,6 +124,7 @@
             this.groupBox1.AutoSize = true;
             this.groupBox1.BackColor = System.Drawing.SystemColors.Menu;
             this.groupBox1.Controls.Add(this.rawByteArrayFromMono);
+            this.groupBox1.Controls.Add(this.typeTreeArrayFromMono);
             this.groupBox1.Controls.Add(this.overwriteExistingFiles);
             this.groupBox1.Controls.Add(this.parallelExportMaxLabel);
             this.groupBox1.Controls.Add(this.parallelExportCheckBox);
@@ -139,7 +141,7 @@
             this.groupBox1.Controls.Add(this.converttexture);
             this.groupBox1.Location = new System.Drawing.Point(12, 13);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(316, 303);
+            this.groupBox1.Size = new System.Drawing.Size(316, 323);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Export";
@@ -153,6 +155,16 @@
             this.rawByteArrayFromMono.TabIndex = 15;
             this.rawByteArrayFromMono.Text = "Raw: Extract raw byte array from MonoBehaviour assets";
             this.rawByteArrayFromMono.UseVisualStyleBackColor = true;
+            // 
+            // typeTreeArrayFromMono
+            // 
+            this.typeTreeArrayFromMono.AutoSize = true;
+            this.typeTreeArrayFromMono.Location = new System.Drawing.Point(6, 284);
+            this.typeTreeArrayFromMono.Name = "typeTreeArrayFromMono";
+            this.typeTreeArrayFromMono.Size = new System.Drawing.Size(290, 17);
+            this.typeTreeArrayFromMono.TabIndex = 16;
+            this.typeTreeArrayFromMono.Text = "Raw: Extract type tree array from MonoBehaviour assets";
+            this.typeTreeArrayFromMono.UseVisualStyleBackColor = true;
             // 
             // overwriteExistingFiles
             // 
@@ -392,7 +404,7 @@
             this.l2dGroupBox.Controls.Add(this.l2dMotionExportMethodPanel);
             this.l2dGroupBox.Controls.Add(this.l2dMotionExportMethodLabel);
             this.l2dGroupBox.Controls.Add(this.l2dForceBezierCheckBox);
-            this.l2dGroupBox.Location = new System.Drawing.Point(12, 304);
+            this.l2dGroupBox.Location = new System.Drawing.Point(12, 324);
             this.l2dGroupBox.Name = "l2dGroupBox";
             this.l2dGroupBox.Size = new System.Drawing.Size(316, 149);
             this.l2dGroupBox.TabIndex = 2;
@@ -794,7 +806,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Menu;
             this.CancelButton = this.Cancel;
-            this.ClientSize = new System.Drawing.Size(628, 494);
+            this.ClientSize = new System.Drawing.Size(628, 514);
             this.Controls.Add(this.l2dGroupBox);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
@@ -882,5 +894,6 @@
         private System.Windows.Forms.Button fbxResetButton;
         private System.Windows.Forms.CheckBox overwriteExistingFiles;
         private System.Windows.Forms.CheckBox rawByteArrayFromMono;
+        private System.Windows.Forms.CheckBox typeTreeArrayFromMono;
     }
 }

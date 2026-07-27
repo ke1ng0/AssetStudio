@@ -35,7 +35,7 @@ namespace AssetStudioGUI
                     .Replace("\nCopyright", "\tCopyright")
                     .Replace("\n", " ")
                     .Replace("\r", "\n\n")
-                    .Replace("\tCopyright", "\nCopyright");
+                    .Replace("\tCopyright", "\nCopyright");                    
             }
 
             return license;
@@ -62,6 +62,15 @@ namespace AssetStudioGUI
         private void gitAelurumLinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             var ps = new ProcessStartInfo("https://github.com/aelurum")
+            {
+                UseShellExecute = true
+            };
+            Process.Start(ps);
+        }
+
+        private void gitKe1ng0LinkLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            var ps = new ProcessStartInfo("https://github.com/ke1ng0")
             {
                 UseShellExecute = true
             };

@@ -327,6 +327,71 @@ namespace AssetStudioGUI
             return false;
         }
 
+        // Export TypeTree File
+        public static bool ExportTypeTreeFile(AssetItem item, string exportPath)
+        {
+            if (!TryExportFile(exportPath, item, ".txt", out var exportFullPath, mode: "Dump"))
+                return false;
+                
+            var str = item.Asset.Dump();
+            
+            // เตรียมตัวแปรเก็บ TypeTree ดึงมาไว้ด้านนอกเพื่อให้เข้าถึงได้จากด้านล่าง
+            AssetStudio.TypeTree m_Type = null; 
+            
+            if (str == null && item.Asset is MonoBehaviour m_MonoBehaviour)
+            {
+                m_Type = Studio.MonoBehaviourToTypeTree(m_MonoBehaviour);
+                str = m_MonoBehaviour.Dump(m_Type);
+            }
+            if (string.IsNullOrEmpty(str))
+            {
+                str = item.Asset.DumpObject();
+            }
+            
+            if (str != null)
+            {
+                // =======================================================
+                // --- [ส่วนที่แทรกเพิ่มเติม] เขียนโครงสร้าง TypeTree ลงไฟล์ใหม่ ---
+                // =======================================================
+                if (item.Asset is MonoBehaviour mb)
+                {
+                    // ถ้า m_Type ยังเป็น null (เพราะอาจจะไม่ได้เข้าเงื่อนไข if ด้านบน) ให้ดึงใหม่
+                    if (m_Type == null)
+                    {
+                        m_Type = Studio.MonoBehaviourToTypeTree(mb);
+                    }
+
+                    // ตรวจสอบว่ามีข้อมูล TypeTree Node หรือไม่
+                    if (m_Type != null && m_Type.m_Nodes != null && m_Type.m_Nodes.Count > 0)
+                    {
+                        // สร้าง Path ของไฟล์ใหม่ โดยเอาชื่อไฟล์เดิมมาเติมคำว่า _TypeTree.json
+                        string dir = Path.GetDirectoryName(exportFullPath);
+                        string fileName = Path.GetFileNameWithoutExtension(exportFullPath);
+                        string typeTreePath = Path.Combine(dir, $"{fileName}_TypeTree.json");
+
+                        List<object> nodeList = new List<object>();
+                        
+                        foreach (var node in m_Type.m_Nodes)
+                        {
+                            nodeList.Add(new
+                            {
+                                m_Type = node.m_Type,
+                                m_Name = node.m_Name,
+                                m_MetaFlag = node.m_MetaFlag,
+                                m_Level = node.m_Level
+                            });                          
+                        }
+                        string jsonString = JsonConvert.SerializeObject(nodeList, Formatting.Indented);
+                        // บันทึกไฟล์ใหม่
+                        File.WriteAllText(typeTreePath, jsonString);
+                    }
+                }
+                // =======================================================
+
+                return true;
+            }
+            return false;
+        }
         public static bool ExportConvertFile(AssetItem item, string exportPath)
         {
             switch (item.Type)

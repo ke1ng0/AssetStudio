@@ -370,5 +370,17 @@ namespace AssetStudioGUI.Properties {
                 this["rawByteArrayFromMono"] = value;
             }
         }
+
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool typeTreeArrayFromMono {
+            get {
+                return ((bool)(this["typeTreeArrayFromMono"]));
+            }
+            set {
+                this["typeTreeArrayFromMono"] = value;
+            }
+        }
     }
 }

@@ -1,4 +1,4 @@
-﻿using AssetStudio;
+using AssetStudio;
 using AssetStudioCLI.Options;
 using CubismLive2DExtractor;
 using System;
@@ -748,7 +748,14 @@ namespace AssetStudioCLI
                             break;
                         case WorkMode.Dump:
                             Logger.Debug($"{CLIOptions.o_workMode}: {asset.Type} : {asset.Container} : {asset.Text}");
-                            isExported = ExportDumpFile(asset, exportPath);
+                            if (CLIOptions.f_typeTreeArrayFromMono.Value)
+                            {
+                                isExported = ExportTypeTreeFile(asset, exportPath);
+                            }
+                            else
+                            {
+                                isExported = ExportDumpFile(asset, exportPath);
+                            }
                             break;
                         case WorkMode.Export:
                             Logger.Debug($"{CLIOptions.o_workMode}: {asset.Type} : {asset.Container} : {asset.Text}");
