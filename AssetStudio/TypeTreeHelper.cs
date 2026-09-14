@@ -228,6 +228,10 @@ namespace AssetStudio
             var varTypeStr = m_Node.m_Type;
             object value;
             var align = (m_Node.m_MetaFlag & 0x4000) != 0;
+            if (TryReadDeclaredBytes(m_Nodes, i, reader, out value))
+            {
+                return value;
+            }
             switch (varTypeStr)
             {
                 case "SInt8":
@@ -352,6 +356,54 @@ namespace AssetStudio
             if (align)
                 reader.AlignStream();
             return value;
+        }
+
+        private static bool TryReadDeclaredBytes(List<TypeTreeNode> nodes, int index, BinaryReader reader, out object value)
+        {
+            value = null;
+            var node = nodes[index];
+            if (node.m_ByteSize <= 0 || HasChildNodes(nodes, index) || IsSupportedNodeType(node.m_Type))
+            {
+                return false;
+            }
+
+            if (reader is ObjectReader objectReader)
+            {
+                var remaining = objectReader.byteStart + objectReader.byteSize - objectReader.Position;
+                var sizeToRead = Math.Min(node.m_ByteSize, remaining);
+                if (sizeToRead > 0)
+                {
+                    reader.BaseStream.Position += sizeToRead;
+                    value = sizeToRead;
+                    return true;
+                }
+            }
+            else
+            {
+                var sizeToRead = node.m_ByteSize;
+                if (sizeToRead > 0)
+                {
+                    reader.BaseStream.Position += sizeToRead;
+                    value = sizeToRead;
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        private static bool HasChildNodes(List<TypeTreeNode> nodes, int index)
+        {
+            return index < nodes.Count - 1 && nodes[index + 1].m_Level > nodes[index].m_Level;
+        }
+
+        private static bool IsSupportedNodeType(string type)
+        {
+            return type switch
+            {
+                "SInt8" or "UInt8" or "char" or "short" or "SInt16" or "UInt16" or "unsigned short" or "int" or "SInt32" or "UInt32" or "unsigned int" or "Type*" or "long long" or "SInt64" or "UInt64" or "unsigned long long" or "FileSize" or "float" or "double" or "bool" or "string" => true,
+                _ => false,
+            };
         }
 
         private static List<TypeTreeNode> GetNodes(List<TypeTreeNode> m_Nodes, int index)
