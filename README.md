@@ -15,7 +15,8 @@
 ## AssetStudio Features
 
 - Support Unity version:
-  - 1.7 - 6000.2
+   - 1.7 - 6000.5
+   - Unity 6 serialized file format 23
 - Support asset types:
   - **Texture2D**, **Texture2DArray** : convert to png, tga, jpeg, bmp, webp
   - **Sprite** : crop Texture2D to png, tga, jpeg, bmp, webp

@@ -454,8 +454,9 @@ namespace AssetStudio
                     switch (compressionType)
                     {
                         case CompressionType.None:
-                            reader.BaseStream.CopyTo(blocksStream, blockInfo.compressedSize);
-                            numWrite = blockInfo.compressedSize;
+                            var uncompressedBytes = reader.ReadBytes((int)blockInfo.compressedSize);
+                            blocksStream.Write(uncompressedBytes, 0, uncompressedBytes.Length);
+                            numWrite = uncompressedBytes.Length;
                             break;
                         case CompressionType.Lzma:
                             numWrite = BundleDecompressionHelper.DecompressLzmaStream(reader.BaseStream, blocksStream, blockInfo.compressedSize, blockInfo.uncompressedSize, ref errorMsg);

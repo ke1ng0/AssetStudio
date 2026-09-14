@@ -82,6 +82,10 @@ namespace AssetStudio
         /// <summary>
         /// 2020.1 to x
         /// </summary>
-        LargeFilesSupport = 22
+        LargeFilesSupport = 22,
+        /// <summary>
+        /// Unity 6 serialized file metadata
+        /// </summary>
+        Unknown_23 = 23
     }
 }

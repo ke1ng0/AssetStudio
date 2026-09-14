@@ -270,6 +270,10 @@ namespace AssetStudio
             {
                 type.m_Type = new TypeTree();
                 type.m_Type.m_Nodes = new List<TypeTreeNode>();
+                if (header.m_Version >= SerializedFileFormatVersion.Unknown_23)
+                {
+                    reader.BaseStream.Position += 28;
+                }
                 if (header.m_Version >= SerializedFileFormatVersion.Unknown_12 || header.m_Version == SerializedFileFormatVersion.Unknown_10)
                 {
                     TypeTreeBlobRead(type.m_Type);

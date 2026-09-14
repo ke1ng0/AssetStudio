@@ -1,5 +1,10 @@
 # Changelog
 
+## v0.19.0.2 [14-09-2026]
+#### Fixes
+- Fixed loading Unity 6 serialized files using format 23 type-tree metadata.
+- Fixed reading uncompressed bundle blocks at their declared boundaries.
+
 ## v0.19.0.0 [04-09-2025]
 #### Breaking Changes
 - Many asset fields of array type have been replaced with list type *(aka fixed the cause of most memory leaks)* ([35b2499](https://github.com/aelurum/AssetStudio/commit/35b24990c6a5d99c15b661578cf9da26aefe8d1b))
