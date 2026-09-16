@@ -1,5 +1,10 @@
 # Changelog
 
+## v0.19.0.3 [16-09-2026]
+#### Fixes
+- Fixed loading Unity asset files without file extensions from the GUI file picker.
+- Fixed loading Sprite assets with empty vertex channel data.
+
 ## v0.19.0.2 [14-09-2026]
 #### Fixes
 - Fixed loading Unity 6 serialized files using format 23 type-tree metadata.

@@ -1534,7 +1534,7 @@
             // openFileDialog1
             // 
             this.openFileDialog1.AddExtension = false;
-            this.openFileDialog1.Filter = "All types|*.*";
+            this.openFileDialog1.Filter = "All files|*|All types|*.*";
             this.openFileDialog1.Multiselect = true;
             this.openFileDialog1.RestoreDirectory = true;
             // 

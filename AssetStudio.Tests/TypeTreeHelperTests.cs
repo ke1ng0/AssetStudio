@@ -89,6 +89,19 @@ public class TypeTreeHelperTests
         Assert.Equal(3L, result["payload"]);
     }
 
+    [Fact]
+    public void VertexData_AllowsEmptyChannelList()
+    {
+        using var stream = new MemoryStream(new byte[12]);
+        using var reader = new EndianBinaryReader(stream, EndianType.LittleEndian);
+        var objectReader = new ObjectReader(reader, CreateFakeSerializedFile(), CreateFakeObjectInfo());
+
+        var vertexData = new VertexData(objectReader);
+
+        Assert.Empty(vertexData.m_Channels);
+        Assert.Empty(vertexData.m_Streams);
+    }
+
     private static SerializedFile CreateFakeSerializedFile()
     {
         var file = (SerializedFile)FormatterServices.GetUninitializedObject(typeof(SerializedFile));
