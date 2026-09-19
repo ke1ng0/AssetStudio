@@ -343,3 +343,7 @@ ASALocalRun/
 healthchecksdb
 
 test/
+repro/
+inspect-asset/
+inspect-dummy/
+inspect-metadata/
