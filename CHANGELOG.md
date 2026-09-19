@@ -1,5 +1,10 @@
 # Changelog
 
+## v0.19.0.4 [20-09-2026]
+#### Fixes
+- Fixed Unity 6 (format 23) type-tree parsing: normalized expanded string nodes (`string`/`Array`/`size`/`char data`), runtime type names (`IMetadata`, `managedRefArrayItem`, `TableEntryData`, `ReferencedObject`, etc.) and garbage meta flags back to the classic compact form.
+- Fixed GUI type-tree export using the real serialized type tree instead of a rebuilt minimal MonoBehaviour schema.
+
 ## v0.19.0.3 [16-09-2026]
 #### Fixes
 - Fixed loading Unity asset files without file extensions from the GUI file picker.

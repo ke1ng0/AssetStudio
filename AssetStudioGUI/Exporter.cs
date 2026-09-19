@@ -334,13 +334,19 @@ namespace AssetStudioGUI
                 return false;
                 
             var str = item.Asset.Dump();
-            
+
             // เตรียมตัวแปรเก็บ TypeTree ดึงมาไว้ด้านนอกเพื่อให้เข้าถึงได้จากด้านล่าง
-            AssetStudio.TypeTree m_Type = null; 
-            
+            AssetStudio.TypeTree m_Type = null;
+
+            // ใช้ TypeTree จริงจากไฟล์ (normalized สำหรับ Unity 6) ก่อนเป็นอันดับแรก
+            m_Type = item.Asset.serializedType?.m_Type;
+
             if (str == null && item.Asset is MonoBehaviour m_MonoBehaviour)
             {
-                m_Type = Studio.MonoBehaviourToTypeTree(m_MonoBehaviour);
+                if (m_Type == null)
+                {
+                    m_Type = Studio.MonoBehaviourToTypeTree(m_MonoBehaviour);
+                }
                 str = m_MonoBehaviour.Dump(m_Type);
             }
             if (string.IsNullOrEmpty(str))
@@ -358,7 +364,7 @@ namespace AssetStudioGUI
                     // ถ้า m_Type ยังเป็น null (เพราะอาจจะไม่ได้เข้าเงื่อนไข if ด้านบน) ให้ดึงใหม่
                     if (m_Type == null)
                     {
-                        m_Type = Studio.MonoBehaviourToTypeTree(mb);
+                        m_Type = item.Asset.serializedType?.m_Type ?? Studio.MonoBehaviourToTypeTree(mb);
                     }
 
                     // ตรวจสอบว่ามีข้อมูล TypeTree Node หรือไม่

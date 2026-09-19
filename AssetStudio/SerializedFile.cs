@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Text;
 
 namespace AssetStudio
 {
@@ -282,6 +283,10 @@ namespace AssetStudio
                 {
                     ReadTypeTree(type.m_Type);
                 }
+                if (header.m_Version >= SerializedFileFormatVersion.Unknown_23)
+                {
+                    NormalizeUnity6TypeTree(type.m_Type);
+                }
                 if (header.m_Version >= SerializedFileFormatVersion.StoresTypeDependencies)
                 {
                     if (isRefType)
@@ -334,6 +339,7 @@ namespace AssetStudio
         {
             int numberOfNodes = reader.ReadInt32();
             int stringBufferSize = reader.ReadInt32();
+            Logger.Debug($"[DBG-tt] blob: numberOfNodes={numberOfNodes} stringBufferSize={stringBufferSize} pos={reader.BaseStream.Position}");
             for (var i = 0; i < numberOfNodes; i++)
             {
                 var typeTreeNode = new TypeTreeNode();
@@ -378,6 +384,101 @@ namespace AssetStudio
                 }
                 return offset.ToString();
             }
+        }
+
+        /// <summary>
+        /// Unity 6 (version >= 23) stores an "expanded" typetree blob:
+        /// - strings are expanded into Array / int size / char data nodes
+        /// - PPtr types are named "PPtr<$Target>"
+        /// - runtime type names are used (IMetadata, managedRefArrayItem, TableEntryData, vector, ...)
+        /// - m_MetaFlag contains extra bits (alignment flag 0x4000 is preserved)
+        /// This normalizes the tree back to the classic compact form.
+        /// </summary>
+        private void NormalizeUnity6TypeTree(TypeTree m_Type)
+        {
+            if (m_Type?.m_Nodes == null || m_Type.m_Nodes.Count == 0)
+                return;
+
+            var nodes = m_Type.m_Nodes;
+            var result = new List<TypeTreeNode>(nodes.Count);
+
+            for (var i = 0; i < nodes.Count; i++)
+            {
+                var node = nodes[i];
+
+                // Collapse expanded string: "string" + "Array" + "int size" + "char data"
+                if (node.m_Type == "string" &&
+                    i + 2 < nodes.Count &&
+                    nodes[i + 1].m_Type == "Array" &&
+                    nodes[i + 2].m_Type == "int" && nodes[i + 2].m_Name == "size" &&
+                    i + 3 < nodes.Count &&
+                    nodes[i + 3].m_Type == "char" && nodes[i + 3].m_Name == "data")
+                {
+                    // keep only the string node; align flag lives on the inner Array node
+                    // in the expanded blob, but on the string node in the classic form
+                    var align = (nodes[i + 1].m_MetaFlag & 0x4000) != 0;
+                    result.Add(new TypeTreeNode
+                    {
+                        m_Type = "string",
+                        m_Name = node.m_Name,
+                        m_Level = node.m_Level,
+                        m_MetaFlag = 0, // classic string nodes carry no align flag
+                        m_ByteSize = node.m_ByteSize,
+                        m_Index = node.m_Index,
+                        m_Version = node.m_Version,
+                        m_TypeFlags = node.m_TypeFlags,
+                        m_TypeStrOffset = node.m_TypeStrOffset,
+                        m_NameStrOffset = node.m_NameStrOffset,
+                        m_RefTypeHash = node.m_RefTypeHash,
+                    });
+                    i += 3; // skip Array / size / data
+                    continue;
+                }
+
+                // Strip the "$" marker from PPtr<$Target>
+                if (node.m_Type != null && node.m_Type.StartsWith("PPtr<$"))
+                {
+                    node.m_Type = "PPtr<" + node.m_Type.Substring(6);
+                }
+
+                // Map runtime type names to classic names
+                switch (node.m_Type)
+                {
+                    case "IMetadata":
+                        node.m_Type = "MetadataItems";
+                        break;
+                    case "managedRefArrayItem":
+                        node.m_Type = "MetadataEntry";
+                        break;
+                    case "TableEntryData":
+                        node.m_Type = node.m_Name == "m_TableData" ? "TableCollection" : "TableEntry";
+                        break;
+                    case "ReferencedObject":
+                        node.m_Type = "RefId";
+                        break;
+                    case "ReferencedManagedType":
+                        node.m_Type = "RefType";
+                        break;
+                    case "vector" when node.m_Name == "RefIds":
+                        node.m_Type = "RefIdCollection";
+                        break;
+                }
+
+                // Normalize meta flags: keep only the align bit (0x4000);
+                // Unity 6 blobs drop the align bit on some Array nodes, restore it.
+                if (node.m_Type == "Array")
+                {
+                    node.m_MetaFlag = 0x4000;
+                }
+                else
+                {
+                    node.m_MetaFlag = (node.m_MetaFlag & 0x4000) != 0 ? 0x4000 : 0;
+                }
+
+                result.Add(node);
+            }
+
+            m_Type.m_Nodes = result;
         }
 
         public void AddObject(Object obj)

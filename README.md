@@ -6,7 +6,7 @@
 
 **AssetStudioMod** - modified version of Perfare's [AssetStudio](https://github.com/Perfare/AssetStudio), mainly focused on UI optimization and some functionality enhancements.
 
-**Version: 0.19.0.3**
+**Version: 0.19.0.4**
 
 **Neither the repository, nor the tool, nor the author of the tool, nor the author of the modification is affiliated with, sponsored, or authorized by Unity Technologies or its affiliates.**
 

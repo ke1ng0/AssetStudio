@@ -102,12 +102,15 @@ namespace AssetStudio
                 case "bool":
                     value = reader.ReadBoolean();
                     break;
-                case "string" when m_Nodes[i + 1].m_Type == "Array":
+                case "string" when i < m_Nodes.Count - 1 && m_Nodes[i + 1].m_Type == "Array":
                     append = false;
                     var str = reader.ReadAlignedString();
                     sb.AppendFormat("{0}{1} {2} = \"{3}\"\r\n", (new string('\t', level)), varTypeStr, varNameStr, str);
                     var toSkip = GetNodes(m_Nodes, i);
                     i += toSkip.Count - 1;
+                    break;
+                case "string": // leaf string node (normalized Unity 6 typetree)
+                    value = reader.ReadAlignedString();
                     break;
                 case "map":
                     {
@@ -278,10 +281,13 @@ namespace AssetStudio
                 case "bool":
                     value = reader.ReadBoolean();
                     break;
-                case "string" when m_Nodes[i + 1].m_Type == "Array":
+                case "string" when i < m_Nodes.Count - 1 && m_Nodes[i + 1].m_Type == "Array":
                     value = reader.ReadAlignedString();
                     var toSkip = GetNodes(m_Nodes, i);
                     i += toSkip.Count - 1;
+                    break;
+                case "string": // leaf string node (normalized Unity 6 typetree)
+                    value = reader.ReadAlignedString();
                     break;
                 case "map":
                     {
