@@ -343,6 +343,9 @@ ASALocalRun/
 healthchecksdb
 
 test/
+!/test/
+/test/*
+test/dump_typetree.py
 repro/
 inspect-asset/
 inspect-dummy/
