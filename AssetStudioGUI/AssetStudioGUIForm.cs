@@ -1771,6 +1771,11 @@ namespace AssetStudioGUI
             ExportAssets(ExportFilter.Selected, ExportType.Dump);
         }
 
+        private void dumpTypeTreeSelectedAssetsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ExportAssets(ExportFilter.Selected, ExportType.DumpTypeTree);
+        }
+
         private void showOriginalFileToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var selectAsset = (AssetItem)assetListView.Items[assetListView.SelectedIndices[0]];

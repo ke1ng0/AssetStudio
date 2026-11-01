@@ -32,6 +32,7 @@ namespace AssetStudioGUI
         Raw,
         Dump,
         JsonDump,
+        DumpTypeTree,
     }
 
     internal enum ExportFilter
@@ -551,7 +552,7 @@ namespace AssetStudioGUI
                 var toParallelExportAssetDict = new ConcurrentDictionary<AssetItem, string>();
                 var exceptionMsgs = new ConcurrentDictionary<Exception, string>();
                 var parallelExportCount = GetParallelExportCount();
-                var mode = exportType == ExportType.Dump || exportType == ExportType.JsonDump ? "Dump" : "Export";
+                var mode = exportType == ExportType.Dump || exportType == ExportType.JsonDump || exportType == ExportType.DumpTypeTree ? "Dump" : "Export";
                 var toExportCount = toExportAssets.Count;
                 var exportedCount = 0;
                 var i = 0;
@@ -654,7 +655,6 @@ namespace AssetStudioGUI
                                 isExported = Exporter.ExportRawFile(asset, exportPath);
                                 break;
                             case ExportType.Dump:
-
                                 if (Properties.Settings.Default.typeTreeArrayFromMono)
                                 {
                                     isExported = Exporter.ExportTypeTreeFile(asset, exportPath);
@@ -666,6 +666,9 @@ namespace AssetStudioGUI
                                 break;
                             case ExportType.JsonDump:
                                 isExported = Exporter.ExportJsonDumpFile(asset, exportPath);
+                                break;
+                            case ExportType.DumpTypeTree:
+                                isExported = Exporter.ExportTypeTreeFile(asset, exportPath);
                                 break;
                             case ExportType.Convert:
                                 isExported = Exporter.ExportConvertFile(asset, exportPath);

@@ -172,6 +172,7 @@
             this.copyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exportSelectedAssetsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dumpSelectedAssetsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.dumpTypeTreeSelectedAssetsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exportAnimatorWithSelectedAnimationClipMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exportAsLive2DModelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exportL2DWithFadeLstToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -1607,6 +1608,7 @@
             this.copyToolStripMenuItem,
             this.exportSelectedAssetsToolStripMenuItem,
             this.dumpSelectedAssetsToolStripMenuItem,
+            this.dumpTypeTreeSelectedAssetsToolStripMenuItem,
             this.exportAnimatorWithSelectedAnimationClipMenuItem,
             this.exportAsLive2DModelToolStripMenuItem,
             this.exportL2DWithFadeLstToolStripMenuItem,
@@ -1638,6 +1640,13 @@
             this.dumpSelectedAssetsToolStripMenuItem.Size = new System.Drawing.Size(331, 22);
             this.dumpSelectedAssetsToolStripMenuItem.Text = "Dump selected assets";
             this.dumpSelectedAssetsToolStripMenuItem.Click += new System.EventHandler(this.dumpSelectedAssetsToolStripMenuItem_Click);
+            // 
+            // dumpTypeTreeSelectedAssetsToolStripMenuItem
+            // 
+            this.dumpTypeTreeSelectedAssetsToolStripMenuItem.Name = "dumpTypeTreeSelectedAssetsToolStripMenuItem";
+            this.dumpTypeTreeSelectedAssetsToolStripMenuItem.Size = new System.Drawing.Size(331, 22);
+            this.dumpTypeTreeSelectedAssetsToolStripMenuItem.Text = "Dump TypeTree selected assets";
+            this.dumpTypeTreeSelectedAssetsToolStripMenuItem.Click += new System.EventHandler(this.dumpTypeTreeSelectedAssetsToolStripMenuItem_Click);
             // 
             // exportAnimatorWithSelectedAnimationClipMenuItem
             // 
@@ -1901,6 +1910,7 @@
         private System.Windows.Forms.ToolStripMenuItem exportAssetListXmlFilterToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem15;
         private System.Windows.Forms.ToolStripMenuItem dumpSelectedAssetsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem dumpTypeTreeSelectedAssetsToolStripMenuItem;
         private System.Windows.Forms.ContextMenuStrip sceneContextMenuStrip;
         private System.Windows.Forms.ToolStripMenuItem shSelectAllToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem shSlearSelectionToolStripMenuItem;
