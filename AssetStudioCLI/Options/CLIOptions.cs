@@ -261,11 +261,11 @@ namespace AssetStudioCLI.Options
                 optionDefaultValue: FilenameFormat.AssetName,
                 optionName: "-f, --filename-format <value>",
                 optionDescription: "Specify the file name format for exported assets\n" +
-                    "<Value: assetName(default) | assetName_pathID | pathID | assetName_hash>\n" +
+                    "<Value: assetName(default) | assetName_pathID | pathID | assetName_hash | classname_unityVersion>\n" +
                     "AssetName - Asset file names will look like \"assetName.extension\"\n" +
                     "AssetName_pathID - Asset file names will look like \"assetName @pathID.extension\"\n" +
                     "PathID - Asset file names will look like \"pathID.extension\"\n" +
-                    "ClassName_unityVersion - MonoBehaviour asset file names will look like \"m_Script.m_ClassName@unityVersion.extension\" (e.g. StringTable@2022.3.10f1.json), other assets will use the asset name\n" +
+                    "ClassName_unityVersion - MonoBehaviour asset file names will look like \"m_Script.m_ClassName@unityVersion.extension\" (e.g. StringTable@2022.3.10f1.json); if m_Script cannot be resolved, the asset name is used in its place. Other assets will use the asset name\n" +
                     "AssetName_hash - (images only) image names will look like \"assetName @hash.extension\"\n",
                 optionExample: "Example: \"-f assetName_pathID\"\n",
                 optionHelpGroup: HelpGroups.General

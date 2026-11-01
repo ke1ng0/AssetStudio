@@ -43,9 +43,10 @@ namespace AssetStudioGUI
                     fileName = item.m_PathID.ToString();
                     break;
                 case 3: //m_ClassName@unityVersion
-                    if (!string.IsNullOrEmpty(item.ScriptClassName))
+                    if (item.Asset is MonoBehaviour)
                     {
-                        fileName = $"{item.ScriptClassName} @{item.SourceFile.version}";
+                        var nameForFormat = !string.IsNullOrEmpty(item.ScriptClassName) ? item.ScriptClassName : fileName;
+                        fileName = $"{nameForFormat}@{item.SourceFile.version}";
                     }
                     break;
             }

@@ -31,8 +31,12 @@ namespace AssetStudioCLI
                 case FilenameFormat.PathID:
                     fileName = item.m_PathID.ToString();
                     break;
-                case FilenameFormat.ClassName_UnityVersion when item.ScriptClassName != null:
-                    fileName = $"{item.ScriptClassName} @{item.SourceFile.version}";
+                case FilenameFormat.ClassName_UnityVersion:
+                    if (item.Asset is MonoBehaviour)
+                    {
+                        var nameForFormat = !string.IsNullOrEmpty(item.ScriptClassName) ? item.ScriptClassName : fileName;
+                        fileName = $"{nameForFormat}@{item.SourceFile.version}";
+                    }
                     break;
             }
             fullPath = SafeFilePath(dir, $"{fileName}{extension}");

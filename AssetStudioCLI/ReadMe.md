@@ -65,7 +65,7 @@ General Options:
                                 AssetName_pathID - Asset file names will look like "assetName @pathID.extension"
                                 PathID - Asset file names will look like "pathID.extension"
                                 AssetName_hash - (images only) image names will look like "assetName @hash.extension"
-                                ClassName_unityVersion - MonoBehaviour asset file names will look like "m_ClassName @unityVersion.extension" (e.g. "StringTable @2022.3.10f1.json"), other assets keep the asset name
+                                ClassName_unityVersion - MonoBehaviour asset file names will look like "m_ClassName@unityVersion.extension" (e.g. "StringTable@2022.3.10f1.json"); if m_Script cannot be resolved, the asset name is used in its place. Other assets keep the asset name
                                 Example: "-f assetName_pathID"
 
   -o, --output <path>           Specify path to the output folder
