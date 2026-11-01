@@ -19,7 +19,8 @@
             // Fallback for Unity assets with type-tree disabled / empty schemas.
             // MonoBehaviour payload in this format is still a script pointer followed by a string.
             m_Script = new PPtr<MonoScript>(reader);
-            m_Name = reader.ReadAlignedString();
+            if (version >= (2, 1))
+                m_Name = reader.ReadAlignedString();
         }
     }
 }
