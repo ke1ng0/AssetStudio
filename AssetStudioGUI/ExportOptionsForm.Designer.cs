@@ -217,16 +217,17 @@
             // filenameFormatComboBox
             // 
             this.filenameFormatComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.filenameFormatComboBox.DropDownWidth = 198;
+            this.filenameFormatComboBox.DropDownWidth = 300;
             this.filenameFormatComboBox.FormattingEnabled = true;
             this.filenameFormatComboBox.Items.AddRange(new object[] {
             "asset name",
             "asset name@pathID",
             "pathID",
-            "asset name@hash (images only)"});
+            "asset name@hash (images only)",
+            "m_ClassName@unityVersion (MonoBehaviour only)"});
             this.filenameFormatComboBox.Location = new System.Drawing.Point(210, 25);
             this.filenameFormatComboBox.Name = "filenameFormatComboBox";
-            this.filenameFormatComboBox.Size = new System.Drawing.Size(149, 23);
+            this.filenameFormatComboBox.Size = new System.Drawing.Size(220, 23);
             this.filenameFormatComboBox.TabIndex = 3;
             // 
             // exportSpriteWithAlphaMask

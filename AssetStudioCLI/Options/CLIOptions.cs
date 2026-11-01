@@ -48,6 +48,7 @@ namespace AssetStudioCLI.Options
         AssetName_PathID,
         PathID,
         AssetName_Hash,
+        ClassName_UnityVersion,
     }
 
     internal enum ExportListType
@@ -264,6 +265,7 @@ namespace AssetStudioCLI.Options
                     "AssetName - Asset file names will look like \"assetName.extension\"\n" +
                     "AssetName_pathID - Asset file names will look like \"assetName @pathID.extension\"\n" +
                     "PathID - Asset file names will look like \"pathID.extension\"\n" +
+                    "ClassName_unityVersion - MonoBehaviour asset file names will look like \"m_Script.m_ClassName@unityVersion.extension\" (e.g. StringTable@2022.3.10f1.json), other assets will use the asset name\n" +
                     "AssetName_hash - (images only) image names will look like \"assetName @hash.extension\"\n",
                 optionExample: "Example: \"-f assetName_pathID\"\n",
                 optionHelpGroup: HelpGroups.General
@@ -1045,6 +1047,9 @@ namespace AssetStudioCLI.Options
                                     break;
                                 case "assetname_hash":
                                     o_filenameFormat.Value = FilenameFormat.AssetName_Hash;
+                                    break;
+                                case "classname_unityversion":
+                                    o_filenameFormat.Value = FilenameFormat.ClassName_UnityVersion;
                                     break;
                                 default:
                                     Console.WriteLine($"{"Error".Color(brightRed)} during parsing [{option.Color(brightYellow)}] option. Unsupported file name format: [{value.Color(brightRed)}].\n");

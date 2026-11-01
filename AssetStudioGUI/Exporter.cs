@@ -42,6 +42,12 @@ namespace AssetStudioGUI
                 case 2: //pathID
                     fileName = item.m_PathID.ToString();
                     break;
+                case 3: //m_ClassName@unityVersion
+                    if (!string.IsNullOrEmpty(item.ScriptClassName))
+                    {
+                        fileName = $"{item.ScriptClassName} @{item.SourceFile.version}";
+                    }
+                    break;
             }
             fullPath = SafeFilePath(dir, $"{fileName}{extension}");
             if (ExportPathHashSet.Add(fullPath))
@@ -51,7 +57,7 @@ namespace AssetStudioGUI
                     return true;
                 }
             }
-            else if (filenameFormatIndex == 0) //assetName
+            else if (filenameFormatIndex == 0 || filenameFormatIndex == 3) //assetName or className@unityVersion
             {
                 fullPath = SafeFilePath(dir, $"{fileName}{item.UniqueID}{extension}");
                 if (CanWrite(fullPath, dir, canOverwrite))

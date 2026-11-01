@@ -208,6 +208,9 @@ namespace AssetStudioCLI
                 case FilenameFormat.AssetName_Hash when item.Hash > 0:
                     fileName = $"{fileName} @{item.Hash:x}";
                     break;
+                case FilenameFormat.ClassName_UnityVersion when item.ScriptClassName != null:
+                    fileName = $"{item.ScriptClassName} @{item.SourceFile.version}";
+                    break;
             }
             extension = extension.ToLower();
             fullPath = Exporter.SafeFilePath(dir, $"{fileName}{extension}");
@@ -218,7 +221,7 @@ namespace AssetStudioCLI
                     return true;
                 }
             }
-            else if (filenameFormat == FilenameFormat.AssetName || (filenameFormat == FilenameFormat.AssetName_Hash && item.Hash == 0))
+            else if (filenameFormat == FilenameFormat.AssetName || filenameFormat == FilenameFormat.ClassName_UnityVersion || (filenameFormat == FilenameFormat.AssetName_Hash && item.Hash == 0))
             {
                 fullPath = Exporter.SafeFilePath(dir, $"{fileName}{item.UniqueID}{extension}");
                 if (CanWrite(fullPath, dir, canOverwrite))

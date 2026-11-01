@@ -11,6 +11,7 @@ namespace AssetStudioGUI
         public SerializedFile SourceFile;
         public string Container = string.Empty;
         public string TypeString;
+        public string ScriptClassName;
         public long m_PathID;
         public long FullSize;
         public ClassIDType Type;

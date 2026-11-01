@@ -7,6 +7,7 @@
     - [GUI] "Raw: Extract type tree array from MonoBehaviour assets" option exports a <name>_TypeTree.json node list alongside dumped MonoBehaviour assets
     - [CLI] --typetree-array flag (Dump mode) does the same
     - [GUI] Added "Dump TypeTree selected assets" option to the Asset List context menu, dumps type trees for selected assets ignoring the export option
+    - Added "m_ClassName@unityVersion" file name format: MonoBehaviour assets are named "<m_Script.m_ClassName>@<unityVersion>.<ext>" (CLI flag: `-f classname_unityVersion`), other asset types keep the plain asset name
     - Type-tree export prefers the real serialized type tree from the file (normalized for Unity 6 format 23), falling back to a schema built from the assembly
     - Type-tree export payload is serialized with System.Text.Json (Newtonsoft.Json dependency removed from exporters)
 

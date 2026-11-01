@@ -29,7 +29,7 @@ AssetStudioModCLI <input path to asset file(s)/folder> [-m, --mode <value>]
 
 General Options:
   -m, --mode <value>            Specify working mode
-                                <Value: extract | export(default) | exportRaw | dump | jsonDump | info |
+<Value: live2d | splitObjects | animator>
                                 live2d | splitObjects | animator>
                                 Extract - Extract(Decompress) asset bundles
                                 Export - Convert and export assets
@@ -60,11 +60,12 @@ General Options:
                                 Example: "-g containerFull"
 
   -f, --filename-format <value> Specify the file name format for exported assets
-                                <Value: assetName(default) | assetName_pathID | pathID | assetName_hash>
+                                <Value: assetName(default) | assetName_pathID | pathID | assetName_hash | classname_unityVersion>
                                 AssetName - Asset file names will look like "assetName.extension"
                                 AssetName_pathID - Asset file names will look like "assetName @pathID.extension"
                                 PathID - Asset file names will look like "pathID.extension"
                                 AssetName_hash - (images only) image names will look like "assetName @hash.extension"
+                                ClassName_unityVersion - MonoBehaviour asset file names will look like "m_ClassName @unityVersion.extension" (e.g. "StringTable @2022.3.10f1.json"), other assets keep the asset name
                                 Example: "-f assetName_pathID"
 
   -o, --output <path>           Specify path to the output folder

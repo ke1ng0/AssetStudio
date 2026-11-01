@@ -296,6 +296,7 @@ namespace AssetStudioGUI
                             if (m_MonoBehaviour.m_Script.TryGet(out var m_Script))
                             {
                                 assetName = assetName == "" ? m_Script.m_ClassName : assetName;
+                                assetItem.ScriptClassName = m_Script.m_ClassName;
                                 switch (m_Script.m_ClassName)
                                 {
                                     case "CubismMoc" when !l2dAssetsManager.ModelDict.ContainsKey(m_MonoBehaviour):
