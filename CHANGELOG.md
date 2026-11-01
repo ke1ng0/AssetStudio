@@ -12,6 +12,7 @@
     - Type-tree export payload is serialized with System.Text.Json (Newtonsoft.Json dependency removed from exporters)
 
 #### Fixes
+- Fixed the GUI filename-format index so the `m_ClassName@unityVersion` option is applied to TypeTree dumps
 - Fixed ClassName@UnityVersion naming when m_Script cannot be resolved, including TypeTree dump output; the asset name is used as the class-name fallback
 - Unity 6 (format 23) normalization now also applies after extracted/shared typetrees are resolved, keeping type-tree export and JsonDump consistent
 

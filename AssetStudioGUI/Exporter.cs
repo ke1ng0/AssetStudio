@@ -42,7 +42,7 @@ namespace AssetStudioGUI
                 case 2: //pathID
                     fileName = item.m_PathID.ToString();
                     break;
-                case 3: //m_ClassName@unityVersion
+                case 4: //m_ClassName@unityVersion (MonoBehaviour only)
                     if (item.Asset is MonoBehaviour)
                     {
                         var nameForFormat = !string.IsNullOrEmpty(item.ScriptClassName) ? item.ScriptClassName : fileName;
@@ -58,7 +58,7 @@ namespace AssetStudioGUI
                     return true;
                 }
             }
-            else if (filenameFormatIndex == 0 || filenameFormatIndex == 3) //assetName or className@unityVersion
+            else if (filenameFormatIndex == 0 || filenameFormatIndex == 3 || filenameFormatIndex == 4) //asset name, asset name@hash, or className@unityVersion
             {
                 fullPath = SafeFilePath(dir, $"{fileName}{item.UniqueID}{extension}");
                 if (CanWrite(fullPath, dir, canOverwrite))
