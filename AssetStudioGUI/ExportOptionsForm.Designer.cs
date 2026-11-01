@@ -112,7 +112,6 @@
 
             this.OKbutton.Location = new System.Drawing.Point(228, 442);
             this.OKbutton.Margin = new System.Windows.Forms.Padding(3, 3, 3, 6);
-:AssetStudioGUI/ExportOptionsForm.Designer.cs
             this.OKbutton.Name = "OKbutton";
             this.OKbutton.Size = new System.Drawing.Size(88, 27);
             this.OKbutton.TabIndex = 2;
@@ -121,7 +120,6 @@
             this.OKbutton.Click += new System.EventHandler(this.OKbutton_Click);
             // 
 
-:AssetStudioGUI/ExportOptionsForm.Designer.cs
             // rawByteArrayFromMono
             // 
             this.rawByteArrayFromMono.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
@@ -403,7 +401,6 @@
             this.converttexture.UseVisualStyleBackColor = true;
             // 
 
-:AssetStudioGUI/ExportOptionsForm.Designer.cs
             // l2dAssetSearchByFilenameCheckBox
             // 
             this.l2dAssetSearchByFilenameCheckBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
@@ -956,7 +953,6 @@
 
             this.ClientSize = new System.Drawing.Size(422, 481);
             this.Controls.Add(this.optionsTabControl);
-:AssetStudioGUI/ExportOptionsForm.Designer.cs
             this.Controls.Add(this.OKbutton);
             this.Controls.Add(this.Cancel);
             this.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -1043,7 +1039,6 @@
         private System.Windows.Forms.Button fbxResetButton;
         private System.Windows.Forms.CheckBox overwriteExistingFiles;
         private System.Windows.Forms.CheckBox rawByteArrayFromMono;
-:AssetStudioGUI/ExportOptions.Designer.cs
         private System.Windows.Forms.CheckBox typeTreeArrayFromMono;
 
         private System.Windows.Forms.TabControl optionsTabControl;
@@ -1056,6 +1051,5 @@
         private System.Windows.Forms.CheckBox keepSpriteSizeCheckBox;
         private System.Windows.Forms.CheckBox dumpMaterialsCheckBox;
         private System.Windows.Forms.CheckBox l2dFilterTexturesCheckBox;
-:AssetStudioGUI/ExportOptionsForm.Designer.cs
     }
 }

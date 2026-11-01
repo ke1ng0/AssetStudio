@@ -1,5 +1,17 @@
 ﻿# Changelog
 
+## v0.20.0.1 [01-11-2026]
+#### New features
+- Merged upstream AssetStudioMod v0.20.0.0 (Unity up to v7000.0, Tuanjie support, new Export options UI, JsonDump mode, etc.)
+- Restored TypeTree export feature on top of the new codebase:
+    - [GUI] "Raw: Extract type tree array from MonoBehaviour assets" option exports a <name>_TypeTree.json node list alongside dumped MonoBehaviour assets
+    - [CLI] --typetree-array flag (Dump mode) does the same
+    - Type-tree export prefers the real serialized type tree from the file (normalized for Unity 6 format 23), falling back to a schema built from the assembly
+    - Type-tree export payload is serialized with System.Text.Json (Newtonsoft.Json dependency removed from exporters)
+
+#### Fixes
+- Unity 6 (format 23) normalization now also applies after extracted/shared typetrees are resolved, keeping type-tree export and JsonDump consistent
+
 ## v0.20.0.0 [01-11-2026]
 #### New features
 - Improved Unity 6+ support (up to v7000.0)

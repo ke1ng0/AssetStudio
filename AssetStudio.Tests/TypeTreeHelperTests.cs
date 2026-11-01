@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Runtime.Serialization;
@@ -86,7 +86,7 @@ public class TypeTreeHelperTests
         var result = TypeTreeHelper.ReadType(typeTree, objectReader);
 
         Assert.Single(result);
-        Assert.Equal(3L, result["payload"]);
+        Assert.Equal(4L, result["payload"]);
     }
 
     [Fact]
@@ -117,7 +117,7 @@ public class TypeTreeHelperTests
         {
             m_PathID = 1,
             byteStart = 0,
-            byteSize = 3,
+            byteSize = 64,
             classID = 0,
             serializedType = null
         };

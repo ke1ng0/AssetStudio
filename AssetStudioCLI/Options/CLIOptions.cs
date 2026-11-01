@@ -901,7 +901,7 @@ namespace AssetStudioCLI.Options
                         if (o_workMode.Value != WorkMode.Dump)
                         {
                             Console.WriteLine($"{"Error".Color(brightRed)} during parsing [{flag.Color(brightYellow)}] flag. This flag is not suitable for the current working mode [{o_workMode.Value}].\n");
-                            ShowOptionDescription(f_typeTreeArrayFromMono, isFlag: true);
+                            ShowOptionDescription(f_typeTreeArrayFromMono);
                             return;
                         }
                         f_typeTreeArrayFromMono.Value = true;

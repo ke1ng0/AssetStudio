@@ -405,7 +405,7 @@ namespace AssetStudio
             return value;
         }
 
-        private static bool TryReadDeclaredBytes(List<TypeTreeNode> nodes, int index, BinaryReader reader, out object value)
+        private static bool TryReadDeclaredBytes(List<TypeTreeNode> nodes, int index, ObjectReader reader, out object value)
         {
             value = null;
             var node = nodes[index];
@@ -446,11 +446,33 @@ namespace AssetStudio
 
         private static bool IsSupportedNodeType(string type)
         {
-            return type switch
+            switch (type)
             {
-                "SInt8" or "UInt8" or "char" or "short" or "SInt16" or "UInt16" or "unsigned short" or "int" or "SInt32" or "UInt32" or "unsigned int" or "Type*" or "long long" or "SInt64" or "UInt64" or "unsigned long long" or "FileSize" or "float" or "double" or "bool" or "string" => true,
-                _ => false,
-            };
+                case "SInt8":
+                case "UInt8":
+                case "char":
+                case "short":
+                case "SInt16":
+                case "UInt16":
+                case "unsigned short":
+                case "int":
+                case "SInt32":
+                case "UInt32":
+                case "unsigned int":
+                case "Type*":
+                case "long long":
+                case "SInt64":
+                case "UInt64":
+                case "unsigned long long":
+                case "FileSize":
+                case "float":
+                case "double":
+                case "bool":
+                case "string":
+                    return true;
+                default:
+                    return false;
+            }
         }
 
         private static List<TypeTreeNode> GetNodes(List<TypeTreeNode> m_Nodes, int index)

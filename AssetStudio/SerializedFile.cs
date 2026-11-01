@@ -20,7 +20,7 @@ namespace AssetStudio
         public readonly List<Object> Objects;
         public readonly Dictionary<long, Object> ObjectsDic;
         private readonly Dictionary<string, List<SerializedType>> extractedTypeTreeDict = new Dictionary<string, List<SerializedType>>();
-        public bool IsTypeTreeExtracted => extractedTypeTreeDict.Count > 0;
+        public bool IsTypeTreeExtracted => extractedTypeTreeDict != null && extractedTypeTreeDict.Count > 0;
 
         public SerializedFileHeader header;
         private byte m_FileEndianess;
@@ -424,7 +424,7 @@ namespace AssetStudio
                         type.subTreeHashList.Add(reader.ReadBytesAsHexString(16));
                     }
                 }
-                if (header.m_Version >= SerializedFileFormatVersion.ExtractedTypeTreeSupport)
+                if (header.m_Version >= SerializedFileFormatVersion.ExtractedTypeTreeSupport && !IsTypeTreeExtracted)
                 {
                     NormalizeUnity6TypeTree(type.m_Type);
                 }
@@ -574,6 +574,7 @@ namespace AssetStudio
                     serializedType.m_Type = new TypeTree();
                     serializedType.m_Type.m_Nodes = new List<TypeTreeNode>();
                     TypeTreeBlobRead(serializedType.m_Type, fileReader);
+                    NormalizeUnity6TypeTree(serializedType.m_Type);
                     if (header.m_Version >= SerializedFileFormatVersion.SharedSubTreeSupport)
                     {
                         serializedType.subTreeHashList = new List<string>();
